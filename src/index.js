@@ -22,15 +22,13 @@ refs.inputRef.addEventListener(
 
 function onCountryInput() {
   if (!refs.inputRef.value) {
-    refs.countryInfo.innerHTML = ' ';
-    refs.countryList.innerHTML = ' ';
+    onClearInput();
     return;
   }
 
   fetchCountries(refs.inputRef.value)
     .then(value => {
-      refs.countryInfo.innerHTML = ' ';
-      refs.countryList.innerHTML = ' ';
+      onClearInput();
 
       if (value.length === 1) {
         refs.countryInfo.innerHTML = countryTemplate(value);
@@ -41,4 +39,9 @@ function onCountryInput() {
       }
     })
     .catch(() => Notiflix.Notify.failure('Oops, there is no country with that name'));
+}
+
+function onClearInput() {
+  refs.countryInfo.innerHTML = ' ';
+  refs.countryList.innerHTML = ' ';
 }
